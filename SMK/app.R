@@ -14,13 +14,41 @@ ui <- fluidPage(
     sidebarLayout(
 
         # inputs on sidebar
-        sidebarPanel(h4("Select Villain:")),
+        sidebarPanel(h4("Select Villain:"),
 
         # Input: select a villain
-        #selectInput()
+        selectInput("villains",
+                    label = NULL,
+                    choices = list("Jasper",
+                                   "Cruella de Vil",
+                                   "Iago",
+                                   "Jafar's Snake",
+                                   "Jafar",
+                                   "Banzai",
+                                   "Scar",
+                                   "Cloud Scar",
+                                   "Alpaca Guard",
+                                   "Kronk",
+                                   "Yzma",
+                                   "Flotsam and Jetsam",
+                                   "Glut",
+                                   "Ursula",
+                                   "Goon Guard",
+                                   "Maleficent",
+                                   "Dragon Maleficent",
+                                   "Drum-Playing Soldier",
+                                   "Governor Ratcliffe",
+                                   "Lawrence",
+                                   "Shadow Demons",
+                                   "Dr. Facilier",
+                                   "Chernabog")),
+
+        # Submit button
+        submitButton("Submit")),
 
         mainPanel(h3("Spells to use:"),
-                  p(strong("The following spells will work well:"))
+                  p(strong("The following spells will work well:")),
+                  tableOutput("matched_spells")
                   )
     )
 )
@@ -33,7 +61,12 @@ library(shiny)
 
 server <- function(input, output){
 
-    # create the dataset
+    # select the matched spells
+    output$matched_spells <- renderTable({
+        MSK %>%
+        filter(villain == input$villains) %>%
+        select(spell, weakness, attack, boost, shield)},
+        striped = TRUE)
 }
 
 
