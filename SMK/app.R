@@ -37,24 +37,20 @@ ui <- fluidPage(
 )
 
 
-
 # Server for SMK app
 
 library(shiny)
 
 server <- function(input, output){
-    # Selected_Villains <- reactive({
-    #     SMK[, c(input$villains)]
-    # })
 
     # select the matched spells
     output$matched_spells <- renderDataTable({
         datatable(
         SMK %>%
         filter(SMK$villain %in% input$villains) %>%
-        select(spell, weakness, attack, boost, shield),
+        select(spell, weakness, attack, boost, shield, strength),
         colnames = c("Spell", "Weakness","Attack",
-                     "Boost", "Shield"))
+                     "Boost", "Shield", "Strength"))
         })
 }
 

@@ -44,3 +44,14 @@ SMK <- villains %>%
 # MSK %>%
 #   filter(villain == "Jafar") %>%
 #   select(spell, attack, boost, shield)
+
+# Want to find overlaps in strength and weakness
+# vill_list <- c("Cruella de Vil", "Banzai")
+#
+# same <- SMK %>%
+#   filter(SMK$villain %in% vill_list) %>%
+#   select(spell, weakness, attack, boost, shield, strength)
+#
+# which(same$weakness %in% same$strength)
+#
+# if(any(same$weakness %in% same$strength)) print("Warning, overlapping strenght and weakness")
