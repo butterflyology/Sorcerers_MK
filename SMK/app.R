@@ -22,29 +22,7 @@ ui <- fluidPage(
                     label = NULL,
                     # multiple = TRUE,
                     # selectize = TRUE,
-                    choices = list("Jasper",
-                                   "Cruella de Vil",
-                                   "Iago",
-                                   "Jafar's Snake",
-                                   "Jafar",
-                                   "Banzai",
-                                   "Scar",
-                                   "Cloud Scar",
-                                   "Alpaca Guard",
-                                   "Kronk",
-                                   "Yzma",
-                                   "Flotsam and Jetsam",
-                                   "Glut",
-                                   "Ursula",
-                                   "Goon Guard",
-                                   "Maleficent",
-                                   "Dragon Maleficent",
-                                   "Drum-Playing Soldier",
-                                   "Governor Ratcliffe",
-                                   "Lawrence",
-                                   "Shadow Demons",
-                                   "Dr. Facilier",
-                                   "Chernabog")),
+                    choices = unique(SMK$villain)),
 
 
         # Submit button
@@ -69,8 +47,8 @@ server <- function(input, output){
     # select the matched spells
     output$matched_spells <- renderDataTable({
         datatable(
-        MSK %>%
-        filter(villain == input$villains) %>%
+        SMK %>%
+        filter(villain ==  c(input$villains)) %>%
         select(spell, weakness, attack, boost, shield),
         colnames = c("Spell", "Weakness","Attack",
                      "Boost", "Shield"))

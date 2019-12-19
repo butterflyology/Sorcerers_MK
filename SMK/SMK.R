@@ -36,7 +36,7 @@ spells <- read_csv("spells.csv", trim_ws = TRUE,
 #glimpse(spells)
 
 
-MSK <- villains %>%
+SMK <- villains %>%
   left_join(spells, by = c("weakness" = "effect"))
 #MSK
 # View(MSK)
