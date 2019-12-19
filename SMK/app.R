@@ -20,7 +20,7 @@ ui <- fluidPage(
         # Input: select a villain
         selectInput("villains",
                     label = NULL,
-                    # multiple = TRUE,
+                    multiple = TRUE,
                     # selectize = TRUE,
                     choices = unique(SMK$villain)),
 
@@ -43,12 +43,15 @@ ui <- fluidPage(
 library(shiny)
 
 server <- function(input, output){
+    # Selected_Villains <- reactive({
+    #     SMK[, c(input$villains)]
+    # })
 
     # select the matched spells
     output$matched_spells <- renderDataTable({
         datatable(
         SMK %>%
-        filter(villain ==  c(input$villains)) %>%
+        filter(SMK$villain %in% input$villains) %>%
         select(spell, weakness, attack, boost, shield),
         colnames = c("Spell", "Weakness","Attack",
                      "Boost", "Shield"))

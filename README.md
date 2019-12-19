@@ -14,3 +14,4 @@ Major commits:
 
 - 2019-12-16: Initial commit with the two main data files in place.
 - 2019-12-17: First app is up and working. Generates a `DT` output based on one villain selected.
+- 2019-12-18: Got the multiple selection working. 
