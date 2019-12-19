@@ -54,4 +54,4 @@ SMK <- villains %>%
 #
 # which(same$weakness %in% same$strength)
 #
-# if(any(same$weakness %in% same$strength)) print("Warning, overlapping strenght and weakness")
+# if(any(same$weakness %in% same$strength)) print("Warning, overlapping strength and weakness")

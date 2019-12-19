@@ -7,6 +7,7 @@ source("SMK.R")
 # Define UI allows you to select a villain and the app returns a list of spells that will act against its weakness
 
 ui <- fluidPage(
+    theme = shinythemes::shinytheme("spacelab"),
 
     # App title
     titlePanel(h1("Sorcerers of the Magic Kingdom")),
@@ -21,7 +22,7 @@ ui <- fluidPage(
         selectInput("villains",
                     label = NULL,
                     multiple = TRUE,
-                    # selectize = TRUE,
+                    selectize = TRUE,
                     choices = unique(SMK$villain)),
 
 
@@ -30,7 +31,6 @@ ui <- fluidPage(
 
         mainPanel(h3("Spells to use:"),
 
-                  p(strong("The following spells will work well:")),
                   dataTableOutput("matched_spells")
                   )
     )
@@ -38,8 +38,6 @@ ui <- fluidPage(
 
 
 # Server for SMK app
-
-library(shiny)
 
 server <- function(input, output){
 
@@ -49,8 +47,9 @@ server <- function(input, output){
         SMK %>%
         filter(SMK$villain %in% input$villains) %>%
         select(spell, weakness, attack, boost, shield, strength),
-        colnames = c("Spell", "Weakness","Attack",
-                     "Boost", "Shield", "Strength"))
+        options = list(searching = FALSE,
+            colnames = c("Spell", "Weakness","Attack",
+                     "Boost", "Shield", "Strength")))
         })
 }
 
